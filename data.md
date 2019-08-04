@@ -42,3 +42,24 @@ python缓冲区:全缓冲,行缓冲,无缓冲
 > * 函数中的元数据
 >
 >   * `f.func_code` `f.func_doc` `f.func_name`... ---> `f.__name__`
+
+> * python中类中定义多个构造方法(类似java中的重载):**\_\_init\_\_()方法中使用\*args*\*kwags根据参数数量来进行判断如何执行构造函数 **
+>
+>   * 尽管这样也是行的通的，但是这样往往会导致代码更加脆弱而且难以维护。而且在实现时也不会展示出那么有用的帮助字符串（没有参数名称）。此外，在创建实例时，代码也会变得不那么清晰。
+>
+>     ```python
+>     import time
+>      
+>     class Date:
+>         def __init__(self,*args):
+>             if len(args)==0:
+>                 t = time.localtime()
+>                 args = (t.tm_year, t.tm_mon, t.tm_mday)
+>             self.year, self.month, self.day = args
+>     
+>     a = Date(2012,12,31)#明确指定日期
+>     b = Date()#信息模糊，指示不明
+>     c = Date.today()#清晰，指定今日
+>     ```
+>
+>     

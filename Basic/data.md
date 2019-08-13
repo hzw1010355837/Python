@@ -37,13 +37,13 @@
 > plt.show()  # 显示图像
 > ```
 >
->  ```python
+> ```python
 > """创建画布"""
 > plt.figure(figsize=(20,10), dpi=100)
 > """绘制图像"""
 > plt.plot(random(60),[random.uniform(15,18) for _ in random(60)])
 > # plt.plot(x,y,color,linestyle,label) 设置label图例时需要在图像辅助层添加代码
->  """辅助显示层"""
+> """辅助显示层"""
 > x_label = ["11点{}分".format(range(60))]
 > plt.xticks(random(60)[::5], x_label[::5])  # 修改刻度
 > plt.yticks(range(40)[::5])
@@ -54,9 +54,9 @@
 > plt.lengend()  # 将图例添加至最佳位置 "best\upper right\center left" 
 > """显示图像"""
 > plt.show()
->  ```
+> ```
 >
->  ```python
+> ```python
 > figure, axes = plt.subplots(nrows=1, ncols=2, figsize=(20,10), dpi=100)  # 使用面向对象的方式画图,1行2列
 > axes[0].plot(x, y, color="r", label="上海")
 > axes[0].set_xticks(x[::5])
@@ -66,6 +66,42 @@
 > axes[0].grid(True, linestyle="--", alpha=0.8)
 > axes[0].legend()
 > plt.show()
->  ```
+> ```
 >
->  
+> * | -      | -                | -                                                            |
+>   | :----- | ---------------- | ------------------------------------------------------------ |
+>   | 折线图 | 变化             | plt.plot(x,y)~~坐标~~                                        |
+>   | 散点图 | 规律/关系        | plt.scatter(x,y)~~坐标~~                                     |
+>   | 柱状图 | 比大小/对比/统计 | plt.bar(x~~刻度~~,y~~数据~~,width~~柱宽~~)                   |
+>   | 直方图 | 分布状况         | plt.hist(x~~数据~~,bins~~组数~~)                             |
+>   | 饼图   | 占比             | plt.pie(x~~数据~~, labels~~每部分内容~~,autopct="%1.2f%%"~~占比显示~~,colors) |
+>
+>   柱状图注意绘制两个相连柱子时,通过控制x位置和width来调整
+>
+>   ```python
+>   # 1 准备画布
+>   plt.figure(figsize=(20,10), dpi=100)
+>   # 2 绘制柱状图
+>   x = range(len(movie_name))
+>   plt.bar([i-0.1 for i in x], first_day,width= 0.2, color='r',label='日票房')
+>   plt.bar([i+0.1 for i in x], first_weekend,width=0.2,color="b", label='周票房')
+>   plt.xticks(x, movie_name)
+>   plt.legend()
+>   plt.grid(linestyle="-", alpha=0.3)
+>   # 3 显示图像
+>   plt.show()
+>   ```
+>
+>   直方图注意组数(bins)控制
+
+<br>
+
+> * Numpy
+>
+>   * 优势:**ndarray中的所有元素的类型都是相同的**，而Python列表中的元素类型是任意的，所以**ndarray在存储元素时内存可以连续**，而python原生lis就t只能通过寻址方式找到下一个元素
+>
+>     * ###### ndarray支持并行化运算
+>
+>     * ###### Numpy底层使用C语言编写，内部解除了GIL（全局解释器锁），其对数组的操作速度不受Python解释器的限制，效率远高于纯Python代码
+
+​	
